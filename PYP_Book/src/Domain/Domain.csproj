@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>PYP_Book.Domain</AssemblyName>
+		<RootNamespace>PYP_Book.Domain</RootNamespace>
+	</PropertyGroup>
+
+</Project>
