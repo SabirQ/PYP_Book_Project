@@ -12,7 +12,7 @@ namespace PYP_Book.Domain.Entities
         public Book Book { get; set; }
         public int Count { get; set; }
         public int OrderId { get; set; }
-        public Order Order { get; set; }
+        public Basket Basket { get; set; }
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
         public DateTime SaleDate { get; set; }

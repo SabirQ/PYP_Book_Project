@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PYP_Book.Domain.Entities
 {
-    public class Order:BaseEntity
+    public class Basket:BaseEntity
     {
         public decimal Total { get; set; }
         public string UserId { get; set; }
