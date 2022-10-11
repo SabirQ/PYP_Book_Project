@@ -8,4 +8,8 @@
 	  <RootNamespace>PYP_Book.Application</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Categories\" />
+  </ItemGroup>
+
 </Project>

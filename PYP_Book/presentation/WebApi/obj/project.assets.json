@@ -214,11 +214,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sabir\\OneDrive\\Рабочий стол\\PYP_Project\\PYP_Book\\presentation\\WebApi\\WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\sabir\\OneDrive\\Рабочий стол\\Новая папка (3)\\PYP_Book\\presentation\\WebApi\\WebApi.csproj",
       "projectName": "WebApi",
-      "projectPath": "C:\\Users\\sabir\\OneDrive\\Рабочий стол\\PYP_Project\\PYP_Book\\presentation\\WebApi\\WebApi.csproj",
+      "projectPath": "C:\\Users\\sabir\\OneDrive\\Рабочий стол\\Новая папка (3)\\PYP_Book\\presentation\\WebApi\\WebApi.csproj",
       "packagesPath": "C:\\Users\\sabir\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sabir\\OneDrive\\Рабочий стол\\PYP_Project\\PYP_Book\\presentation\\WebApi\\obj\\",
+      "outputPath": "C:\\Users\\sabir\\OneDrive\\Рабочий стол\\Новая папка (3)\\PYP_Book\\presentation\\WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

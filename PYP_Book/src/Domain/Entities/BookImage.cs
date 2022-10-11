@@ -13,5 +13,6 @@ namespace PYP_Book.Domain.Entities
         public string Alternative { get; set; }
         public int? BookId { get; set; }
         public Book? Book { get; set; }
+        public bool Primary { get; set; }
     }
 }

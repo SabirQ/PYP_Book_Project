@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace PYP_Book.Domain.Entities
 {
-    public class Comment: BaseEntity
+    public class WishListItem:BaseEntity
     {
+        public Book Book { get; set; }
+        public int WishListId { get; set; }
+        public WishList WishList { get; set; }
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
-        public int BookId { get; set; }
-        public Book Book { get; set; }
-        public string Message { get; set; }
-        public DateTime CommentedAt { get; set; }
-        public DateTime EditedAt { get; set; }
+        public DateTime SaleDate { get; set; }
     }
 }

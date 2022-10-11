@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AELcGCtC/l84w3GnarDrFxwCqO2/i+34xLexwyE56wc40QizwVqavRJICXMdTiIWqyTQPvEC34fXMDmts19RZA==",
+  "dgSpecHash": "JxvxvsHB1V7uvNRTUIscyWvIBhvIIJ2WU538QcDC5xXUUy+R3GR6NifwIw6B8scpvZUxKfpyzwamaHSQ/6gfkQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sabir\\OneDrive\\Рабочий стол\\PYP_Project\\PYP_Book\\presentation\\WebApi\\WebApi.csproj",
+  "projectFilePath": "C:\\Users\\sabir\\OneDrive\\Рабочий стол\\Новая папка (3)\\PYP_Book\\presentation\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sabir\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\sabir\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
