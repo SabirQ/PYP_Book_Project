@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "t7j0TIO+vRG3kjfIH64fz7rHv1oIz36BDdRVmdtJ/FsO7vjVXoNIrX8BmsNAso8GGErFiAY3oQmWmDPX/Gzqaw==",
+  "dgSpecHash": "3dqfJmcxbCffdsQ80nlzux+kJC9AcOLk1+xwlADelFV8zwsAkl6eieaBUrg4B113PLw2etnr2CzEkgFQbZyjVA==",
   "success": true,
   "projectFilePath": "C:\\Users\\sabir\\OneDrive\\Рабочий стол\\Новая папка (3)\\PYP_Book\\src\\Application\\Application.csproj",
   "expectedPackageFiles": [
@@ -11,10 +11,12 @@
     "C:\\Users\\sabir\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
     "C:\\Users\\sabir\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\sabir\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.0.0\\mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\sabir\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\sabir\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\sabir\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\sabir\\.nuget\\packages\\microsoft.extensions.options\\3.0.0\\microsoft.extensions.options.3.0.0.nupkg.sha512",
-    "C:\\Users\\sabir\\.nuget\\packages\\microsoft.extensions.primitives\\3.0.0\\microsoft.extensions.primitives.3.0.0.nupkg.sha512",
+    "C:\\Users\\sabir\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\sabir\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
     "C:\\Users\\sabir\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512"
   ],
   "logs": []
