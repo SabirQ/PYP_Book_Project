@@ -12,7 +12,6 @@ namespace PYP_Book.Infrastructure.Services
 {
     public class FileUploadService : IFileUploadService
     {
-
         public bool CheckImage(IFormFile file, int mb)
         {
             return file.Length / 1024 / 1024 < mb && file.ContentType.Contains("image/");

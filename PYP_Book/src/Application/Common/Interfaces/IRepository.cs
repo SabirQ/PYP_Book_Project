@@ -10,11 +10,12 @@ namespace PYP_Book.Application.Common.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        Task<ICollection<T>> GetAllAsync(Expression<Func<T, bool>> expression, params string[] includes);
+        Task<ICollection<T>> GetAllAsync(Expression<Func<T, bool>> expression,bool getDeleted=false, params string[] includes);
         Task<T> GetByIdAsync(int id);
-        Task<T> AddAsync(T entity);
-        Task DeleteAsync(T entity);
-        Task SoftDeleteAsync(T entity);
-        Task UpdateAsync(T entity);
+        Task<T> GetByIdWithIncludesAsync(int id, params string[] includes);
+        Task<T> AddAsync(T entity, CancellationToken cancellationToken);
+        Task DeleteAsync(T entity, CancellationToken cancellationToken);
+        Task SoftDeleteAsync(T entity, CancellationToken cancellationToken);
+        Task UpdateAsync(T entity, CancellationToken cancellationToken);
     }
 }

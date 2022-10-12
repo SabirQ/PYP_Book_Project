@@ -20,7 +20,6 @@
     <Folder Include="Books\Queries\Gets\" />
     <Folder Include="Books\Queries\Get\" />
     <Folder Include="Categories\Queries\GetCategory\" />
-    <Folder Include="Categories\Queries\GetCategories\" />
     <Folder Include="Discounts\Commands\Create\" />
     <Folder Include="Discounts\Commands\Delete\" />
     <Folder Include="Discounts\Commands\Update\" />

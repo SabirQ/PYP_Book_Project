@@ -21,23 +21,31 @@ namespace PYP_Book.Infrastructure.Common.Repositories
             _context = context;
             _dbSet = _context.Set<T>();
         }
-        public async Task<T> AddAsync(T entity)
+        public async Task<T> AddAsync(T entity,CancellationToken cancellationToken)
         {
             await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             return entity;
         }
 
-        public async Task DeleteAsync(T entity)
+        public Task<T> AddAsync(T entity)
         {
-           _dbSet.Remove(entity);
-           await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<ICollection<T>> GetAllAsync(Expression<Func<T, bool>> expression=null, params string[] includes)
+        public async Task DeleteAsync(T entity, CancellationToken cancellationToken)
+        {
+           _dbSet.Remove(entity);
+           await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<ICollection<T>> GetAllAsync(Expression<Func<T, bool>> expression=null,bool getDeleted=false,  params string[] includes)
         {
             IQueryable<T> query = expression is null ? _dbSet.AsQueryable() : _dbSet.Where(expression);
-            query = query.Where(x => x.Deleted == false);
+            if (getDeleted==false)
+            {
+                query = query.Where(x => x.Deleted == false);
+            }
             if (includes.Length != 0)
             {
                 for (int i = 0; i < includes.Length; i++)
@@ -51,19 +59,31 @@ namespace PYP_Book.Infrastructure.Common.Repositories
 
         public async Task<T> GetByIdAsync(int id)
         {
-           return await _dbSet.FirstOrDefaultAsync(x=>x.Id==id);
+           return await _dbSet.FirstOrDefaultAsync(x=>x.Id==id&&x.Deleted==false);
+        }
+        public async Task<T> GetByIdWithIncludesAsync(int id,params string[] includes)
+        {
+            IQueryable<T> query = _dbSet.Where(x => x.Id == id&&x.Deleted==false).AsQueryable();
+            if (includes.Length!=0)
+            {
+                for (int i = 0; i < includes.Length; i++)
+                {
+                    query = query.Include(includes[i]);
+                }
+            }
+            return await query.SingleOrDefaultAsync();
         }
 
-        public async Task SoftDeleteAsync(T entity)
+        public async Task SoftDeleteAsync(T entity, CancellationToken cancellationToken)
         {
            entity.Deleted = true;
-           await UpdateAsync(entity);
+           await UpdateAsync(entity, cancellationToken);
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity, CancellationToken cancellationToken)
         {
             _dbSet.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }
