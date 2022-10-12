@@ -9,7 +9,7 @@ namespace PYP_Book.Application.Common.Interfaces
 {
     public interface IFileUploadService
     {
-        Task<string> FileCreateAsync(IFormFile file, string filename, string root, string folder);
+        Task<string> FileCreateAsync(IFormFile file);
         void FileDelete(string root, string folder, string image);
 
         bool CheckImage(IFormFile file, int mb);

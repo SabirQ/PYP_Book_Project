@@ -10,7 +10,7 @@ namespace PYP_Book.Domain.Entities
     public class Category: BaseAuditableEntity
     {
         public string Name { get; set; }
-        public string ImageName { get; set; }
+        public string? ImageUrl { get; set; }
         public ICollection<Book> Books { get; set; }
     }
 }

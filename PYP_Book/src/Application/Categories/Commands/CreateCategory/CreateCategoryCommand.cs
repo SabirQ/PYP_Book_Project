@@ -33,15 +33,8 @@ namespace PYP_Book.Application.Categories.Commands.CreateCategory
 
         public async Task<int> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
-
             var entity = _mapper.Map<Category>(request);
-            entity.ImageName=await _fileUpload.FileCreateAsync(request.Photo, "todo", "todo","todo");
-            //TODO add root
-            entity.CreatedAt=DateTime.Now;
-            entity.ModifiedAt = DateTime.Now;
-            //TODO add users
-            entity.Deleted = false;
-
+            entity.ImageUrl=await _fileUpload.FileCreateAsync(request.Photo);
             await _repository.AddAsync(entity);
             return entity.Id;
         }

@@ -15,5 +15,10 @@ namespace Domain.Commons
         public DateTime? ModifiedAt { get; set; }
 
         //public string? ModifiedBy { get; set; }
+        public BaseAuditableEntity()
+        {
+            CreatedAt = DateTime.Now;
+            ModifiedAt = DateTime.Now;
+        }
     }
 }
