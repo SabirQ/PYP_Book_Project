@@ -22,18 +22,27 @@ namespace PYP_Book.Application.Categories.Commands.CreateCategory
     {
         private readonly ICategoryRepository _repository;
         private readonly IMapper _mapper;
-        public CreateCategoryCommandHandler(ICategoryRepository repository, IMapper mapper)
+        private readonly IFileUploadService _fileUpload;
+
+        public CreateCategoryCommandHandler(ICategoryRepository repository, IMapper mapper,IFileUploadService fileUpload)
         {
             _repository = repository;
-            this._mapper = mapper;
+            _mapper = mapper;
+            _fileUpload = fileUpload;
         }
 
         public async Task<int> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
 
             var entity = _mapper.Map<Category>(request);
-            _context.Categories.Add(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            entity.ImageName=await _fileUpload.FileCreateAsync(request.Photo, "todo", "todo","todo");
+            //TODO add root
+            entity.CreatedAt=DateTime.Now;
+            entity.ModifiedAt = DateTime.Now;
+            //TODO add users
+            entity.Deleted = false;
+
+            await _repository.AddAsync(entity);
             return entity.Id;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Domain.Commons;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PYP_Book.Domain.Entities
 {
-    public class AppUser:BaseEntity
+    public class AppUser: IdentityUser
     {
 
     }

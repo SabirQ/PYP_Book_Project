@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace PYP_Book.Application.Categories.Commands.UpdateCategory
 {
-    public class UpdateCategoryCommand
+    public class UpdateCategoryCommandValidator
     {
-
     }
 }

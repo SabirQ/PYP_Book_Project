@@ -14,6 +14,8 @@ namespace PYP_Book.Domain.Entities
         public int BookId { get; set; }
         public Book Book { get; set; }
         public string Message { get; set; }
+        public int? ReplyId { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         public DateTime CommentedAt { get; set; }
         public DateTime EditedAt { get; set; }
     }

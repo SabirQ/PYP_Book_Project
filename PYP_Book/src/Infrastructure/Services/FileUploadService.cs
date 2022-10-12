@@ -10,16 +10,13 @@ namespace PYP_Book.Infrastructure.Services
 {
     public class FileUploadService : IFileUploadService
     {
-        public FileUploadService(IWebHostEnvironment env)
-        {
-
-        }
+       
         public bool CheckImage(IFormFile file, int mb)
         {
             return file.Length / 1024 / 1024 < mb && file.ContentType.Contains("image/");
         }
 
-        public async Task<string> FileCreate(IFormFile file, string root, string folder)
+        public async Task<string> FileCreateAsync(IFormFile file, string filename, string root, string folder)
         {
             string Name = file.FileName;
             string path = Path.Combine(root, folder);
