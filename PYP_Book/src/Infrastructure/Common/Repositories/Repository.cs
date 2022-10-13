@@ -28,10 +28,6 @@ namespace PYP_Book.Infrastructure.Common.Repositories
             return entity;
         }
 
-        public Task<T> AddAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task DeleteAsync(T entity, CancellationToken cancellationToken)
         {

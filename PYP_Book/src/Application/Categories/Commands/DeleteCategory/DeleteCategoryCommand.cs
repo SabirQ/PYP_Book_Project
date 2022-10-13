@@ -21,7 +21,7 @@ namespace PYP_Book.Application.Categories.Commands.DeleteCategory
 
         public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            Category entity = await _repository.GetByIdWithIncludesAsync(request.Id,"Books","Book.Category");
+            Category entity = await _repository.GetByIdWithIncludesAsync(request.Id,nameof(Category.Books),nameof(Book.Category));
             if (entity == null)
             {
                 //throw new NotFoundException(nameof(DeleteCategoryCommand), request.Id);
@@ -29,14 +29,11 @@ namespace PYP_Book.Application.Categories.Commands.DeleteCategory
             }
             if (entity.Books!=null)
             {
-                foreach (Book book in entity.Books)
+                for (int i = 0; i < entity.Books.Count; i++)
                 {
-                    book.CategoryId = null;
-                    book.Category = null;
+                    entity.Books.ElementAt(i).CategoryId = null;
                 }
-                //soft delete ask
             }
-
             await _repository.SoftDeleteAsync(entity, cancellationToken);
             return Unit.Value;
         }
