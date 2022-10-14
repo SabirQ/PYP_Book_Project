@@ -10,7 +10,7 @@ namespace PYP_Book.Application.Authors.Commands.UpdateAuthor
         public string Name { get; set; }
         public string Surname { get; set; }
     }
-
+   
     public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand>
     {
         private readonly IUnitOfWork _unit;

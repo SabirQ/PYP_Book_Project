@@ -1,24 +1,24 @@
 ﻿using AutoMapper;
 using MediatR;
 using PYP_Book.Application.Common.Interfaces;
+using PYP_Book.Domain.Entities;
 
 namespace PYP_Book.Application.Books.Queries.GetBooks
 {
     public class GetBooksQueryHandler : IRequestHandler<GetBooksQuery, ICollection<GetBooksDto>>
     {
-        private readonly IBookRepository _repository;
-
+        private readonly IUnitOfWork _unit;
         private readonly IMapper _mapper;
 
-        public GetBooksQueryHandler(IBookRepository repository, IMapper mapper)
+        public GetBooksQueryHandler(IUnitOfWork unit, IMapper mapper)
         {
-            _repository = repository;
+            _unit = unit;
             _mapper = mapper;
         }
 
         public async Task<ICollection<GetBooksDto>> Handle(GetBooksQuery request, CancellationToken cancellationToken)
         {
-            var entities = await _repository.GetAllAsync();
+            var entities = await _unit.BookRepository.GetAllAsync(null,false,nameof(Book.Author),nameof(Book.BookImages), nameof(Book.Discount));
             var BooksDto= _mapper.Map<ICollection<GetBooksDto>>(entities);
             return BooksDto;
         }

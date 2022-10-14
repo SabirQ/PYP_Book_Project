@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Commons
 {
-    public class BaseAuditableEntity:BaseEntity
+    public abstract class BaseAuditableEntity:BaseEntity
     {
         public DateTime CreatedAt { get; set; }
 

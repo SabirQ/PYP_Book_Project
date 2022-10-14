@@ -9,11 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Discounts\Commands\Create\" />
-    <Folder Include="Discounts\Commands\Delete\" />
-    <Folder Include="Discounts\Commands\Update\" />
-    <Folder Include="Discounts\Queries\Gets\" />
-    <Folder Include="Discounts\Queries\Get\" />
     <Folder Include="Languages\Commands\Create\" />
     <Folder Include="Languages\Commands\Delete\" />
     <Folder Include="Languages\Commands\Update\" />

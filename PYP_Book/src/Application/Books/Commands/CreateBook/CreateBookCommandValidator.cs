@@ -41,15 +41,17 @@ namespace PYP_Book.Application.Books.Commands.CreateBook
         }
         
         public bool CheckFileSizeAndType(ICollection<CreateBookImageNestedCommand> files)
-        {
+        {   bool isPrimaryValid=false;
+            int PrimaryCount=0;
             for (int i = 0; i < files.Count; i++)
             {
                 if (files.ElementAt(i).Primary==true)
                 {
-                    return _unit.FileUpload.CheckImage(files.ElementAt(i).Image, ACCEPTABLE_FILE_SIZE);
+                    PrimaryCount++;
+                    isPrimaryValid = _unit.FileUpload.CheckImage(files.ElementAt(i).Image, ACCEPTABLE_FILE_SIZE);
                 }
             }
-            return false;
+            return isPrimaryValid && PrimaryCount==1;
         }
     }
 }

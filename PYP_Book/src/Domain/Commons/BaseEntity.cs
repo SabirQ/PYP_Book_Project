@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Commons
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public int Id { get; set; }
         public bool Deleted { get; set; }
