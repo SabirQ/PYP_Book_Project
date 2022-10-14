@@ -18,7 +18,7 @@ namespace PYP_Book.Application.Discounts.Queries.GetDiscount
 
         public async Task<GetDiscountDto> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _unit.DiscountRepository.GetByIdWithIncludesAsync(request.Id,nameof(Discount.Books),"Books.Discount");
+            var entity = await _unit.DiscountRepository.GetByIdWithIncludesAsync(request.Id,nameof(Discount.Books));
             var DiscountDto = _mapper.Map<GetDiscountDto>(entity);
             return DiscountDto;
         }

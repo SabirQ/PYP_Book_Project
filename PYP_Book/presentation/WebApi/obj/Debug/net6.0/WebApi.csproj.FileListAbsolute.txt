@@ -78,3 +78,5 @@ C:\Users\sabir\OneDrive\Рабочий стол\Новая папка (3)\PYP_Bo
 C:\Users\sabir\OneDrive\Рабочий стол\Новая папка (3)\PYP_Book\presentation\WebApi\obj\Debug\net6.0\WebApi.genruntimeconfig.cache
 C:\Users\sabir\OneDrive\Рабочий стол\Новая папка (3)\PYP_Book\presentation\WebApi\obj\Debug\net6.0\ref\WebApi.dll
 C:\Users\sabir\OneDrive\Рабочий стол\Новая папка (3)\PYP_Book\presentation\WebApi\obj\Debug\net6.0\WebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\sabir\OneDrive\Рабочий стол\Новая папка (3)\PYP_Book\presentation\WebApi\bin\Debug\net6.0\Humanizer.dll
+C:\Users\sabir\OneDrive\Рабочий стол\Новая папка (3)\PYP_Book\presentation\WebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
