@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using PYP_Book.Application.Common.Dtos;
-using PYP_Book.Application.Common.Interfaces;
+using PYP_Book.Application.Common.Interfaces.Services;
 using PYP_Book.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

@@ -3,9 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PYP_Book.Application.Common.Interfaces;
+using PYP_Book.Application.Common.Interfaces.Repositories;
+using PYP_Book.Application.Common.Interfaces.Services;
+using PYP_Book.Infrastructure.Common;
 using PYP_Book.Infrastructure.Common.Repositories;
+using PYP_Book.Infrastructure.Common.Services;
 using PYP_Book.Infrastructure.Data;
-using PYP_Book.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +37,7 @@ namespace PYP_Book.Infrastructure.ServiceRegistration
 
             service.AddTransient<IFileUploadService, FileUploadService>();
             service.AddTransient<IIdentityService, IdentityService>();
+
             service.AddTransient<IUnitOfWork, UnitOFWork>();
 
             return service;

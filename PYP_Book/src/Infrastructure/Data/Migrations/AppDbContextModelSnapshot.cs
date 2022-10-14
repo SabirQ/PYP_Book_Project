@@ -282,8 +282,7 @@ namespace PYP_Book.Infrastructure.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("DiscountId")
                         .HasColumnType("int");

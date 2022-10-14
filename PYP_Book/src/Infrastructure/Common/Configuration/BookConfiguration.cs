@@ -15,7 +15,7 @@ namespace PYP_Book.Infrastructure.Common.Configuration
         {
             builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
             builder.HasIndex(x => x.Name).IsUnique();
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(300);
+            builder.Property(x => x.Description).IsRequired().HasColumnType("text");
             builder.Property(x => x.Price).HasColumnType("decimal(6,2)").IsRequired();
         }
     }
