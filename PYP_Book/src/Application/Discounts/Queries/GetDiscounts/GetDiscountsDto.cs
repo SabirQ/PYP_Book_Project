@@ -2,12 +2,12 @@
 using PYP_Book.Domain.Entities;
 
 
-namespace PYP_Book.Application.Authors.Queries.GetAuthors
+namespace PYP_Book.Application.Discounts.Queries.GetDiscounts
 {
-    public class GetAuthorsDto:IMapFrom<Author>
+    public class GetDiscountsDto:IMapFrom<Discount>
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
+        public byte Percentage { get; set; }
     }
 }

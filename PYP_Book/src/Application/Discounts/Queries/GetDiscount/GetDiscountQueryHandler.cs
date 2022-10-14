@@ -3,24 +3,24 @@ using MediatR;
 using PYP_Book.Application.Common.Interfaces;
 using PYP_Book.Domain.Entities;
 
-namespace PYP_Book.Application.Authors.Queries.GetAuthor
+namespace PYP_Book.Application.Discounts.Queries.GetDiscount
 {
-    public class GetAuthorQueryHandler : IRequestHandler<GetAuthorQuery, GetAuthorDto>
+    public class GetDiscountQueryHandler : IRequestHandler<GetDiscountQuery, GetDiscountDto>
     {
         private readonly IUnitOfWork _unit;
         private readonly IMapper _mapper;
 
-        public GetAuthorQueryHandler(IUnitOfWork unit, IMapper mapper)
+        public GetDiscountQueryHandler(IUnitOfWork unit, IMapper mapper)
         {
             _unit = unit;
             _mapper = mapper;
         }
 
-        public async Task<GetAuthorDto> Handle(GetAuthorQuery request, CancellationToken cancellationToken)
+        public async Task<GetDiscountDto> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _unit.AuthorRepository.GetByIdWithIncludesAsync(request.Id,nameof(Author.Books),nameof(Book.Discount));
-            var authorDto = _mapper.Map<GetAuthorDto>(entity);
-            return authorDto;
+            var entity = await _unit.DiscountRepository.GetByIdWithIncludesAsync(request.Id,nameof(Discount.Books),"Books.Discount");
+            var DiscountDto = _mapper.Map<GetDiscountDto>(entity);
+            return DiscountDto;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace PYP_Book.Application.Categories.Commands.UpdateCategory
         }
         public bool CheckFileSizeAndType(IFormFile file)
         {
-            if (file!=null) return true;
+            if (file==null) return true;
             return _unit.FileUpload.CheckImage(file, ACCEPTABLE_FILE_SIZE);
         }
     }

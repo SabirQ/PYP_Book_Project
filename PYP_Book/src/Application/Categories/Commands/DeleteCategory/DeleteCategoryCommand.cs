@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using PYP_Book.Application.Common.Exceptions;
 using PYP_Book.Application.Common.Interfaces;
 using PYP_Book.Domain.Entities;
 using System;
@@ -24,8 +25,8 @@ namespace PYP_Book.Application.Categories.Commands.DeleteCategory
             Category entity = await _unit.CategoryRepository.GetByIdWithIncludesAsync(request.Id,nameof(Category.Books));
             if (entity == null)
             {
-                //throw new NotFoundException(nameof(DeleteCategoryCommand), request.Id);
-                throw new ArgumentException();
+                throw new NotFoundException(nameof(DeleteCategoryCommand), request.Id);
+
             }
             if (entity.Books!=null)
             {

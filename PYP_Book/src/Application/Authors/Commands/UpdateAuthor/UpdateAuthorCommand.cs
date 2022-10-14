@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using PYP_Book.Application.Common.Exceptions;
 using PYP_Book.Application.Common.Interfaces;
 
 namespace PYP_Book.Application.Authors.Commands.UpdateAuthor
@@ -25,9 +26,8 @@ namespace PYP_Book.Application.Authors.Commands.UpdateAuthor
 
             if (entity == null)
             {
-                throw new ArgumentException();
-                //throw new NotFoundException("UpdateAuthorCommand");
-                //throw new NotFoundException(nameof(DeleteAuthorCommand), request.Id);
+               
+                throw new NotFoundException(nameof(UpdateAuthorCommand), request.Id);
             }
 
             entity.Name = request.Name;

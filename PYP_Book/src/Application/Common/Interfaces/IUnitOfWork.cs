@@ -9,6 +9,10 @@ namespace PYP_Book.Application.Common.Interfaces
     public interface IUnitOfWork
     {
         public IBookRepository BookRepository { get; }
+        public ILanguageRepository LanguageRepository { get; }
+        public IFormatRepository FormatRepository { get; }
+        public ICommentRepository CommentRepository { get; }
+        public ISettingRepository SettingRepository { get; }
         public ICategoryRepository CategoryRepository { get; }
         public IDiscountRepository DiscountRepository { get; }
         public IAuthorRepository AuthorRepository { get; }

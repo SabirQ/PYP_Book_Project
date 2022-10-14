@@ -12,7 +12,7 @@ namespace PYP_Book.Domain.Entities
         public string Title { get; set; }
         public string SecondTitle { get; set; }
         public string Desciption { get; set; }
-        public string ImageName { get; set; }
+        public string ImageUrl { get; set; }
         public byte Order { get; set; }
     }
 }

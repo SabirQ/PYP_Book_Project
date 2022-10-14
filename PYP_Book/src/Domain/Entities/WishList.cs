@@ -11,8 +11,6 @@ namespace PYP_Book.Domain.Entities
     {
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set; }
         public ICollection<WishListItem> WishListItems { get; set; }
 
     }

@@ -21,16 +21,20 @@ namespace PYP_Book.Application.Books.Commands.UpdateBook
         }
         public async Task<Unit> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _unit.BookRepository.GetByIdWithIncludesAsync(request.Id,nameof(Book.BookImages));
+            var entity = await _unit.BookRepository.GetByIdWithIncludesAsync(
+                request.Id
+                ,nameof(Book.BookImages)
+                ,nameof(Book.BookLanguages)
+                ,nameof(Book.BookFormats)
+                );
+
             if (entity == null) throw new NotFoundException(nameof(UpdateBookCommand), request.Id);
             entity.AuthorId = request.AuthorId;
             entity.CategoryId = request.CategoryId;
             entity.DiscountId=request.DiscountId;
-
-            if(!string.IsNullOrEmpty(entity.Name)) entity.Name = request.Name;
-            if(entity.Price!=null) entity.Price = request.Price.Value;
-            if(entity.Stock!=null) entity.Stock = request.Stock.Value;
-
+            entity.Name = request.Name;
+            entity.Price = request.Price;
+            entity.Stock = request.Stock;
             entity = await DeleteImagesAsync(entity, request);
             _unit.BookRepository.Update(entity);
             await _unit.SaveChangesAsync(cancellationToken);
@@ -40,8 +44,10 @@ namespace PYP_Book.Application.Books.Commands.UpdateBook
         {
             if (request.SetFirstImageAsPrimary == true)
             {
-                if (request.Images.Count == 0 || !_unit.FileUpload.CheckImage(request.Images.ElementAt(0), ACCEPTABLE_FILE_SIZE))
-                    throw new PrimaryDeleteException("Primary image is not valid or Image was not choosen");
+                if (request.Images == null)
+                    throw new PrimaryDeleteException("Primary Image was not choosen");
+                if (!_unit.FileUpload.CheckImage(request.Images.ElementAt(0), ACCEPTABLE_FILE_SIZE))
+                    throw new PrimaryDeleteException("Primary image is not valid");
                 
                 var existedPrimary = entity.BookImages.FirstOrDefault(x => x.Primary == true);
                 existedPrimary.Deleted = true;

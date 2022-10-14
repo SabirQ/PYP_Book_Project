@@ -1,6 +1,8 @@
 ﻿using PYP_Book.Application.Authors.Queries.GetAuthor;
 using PYP_Book.Application.Books.Queries.GetBook;
 using PYP_Book.Application.Categories.Queries.GetCategory;
+using PYP_Book.Application.Formats.Queries.GetFormat;
+using PYP_Book.Application.Languages.Queries.GetLanguage;
 using PYP_Book.Application.Mappings;
 using PYP_Book.Domain.Entities;
 using System;
@@ -23,9 +25,9 @@ namespace PYP_Book.Application.Books.Queries.GetBook
         public GetDiscountNestedDto? Discount { get; set; }
         public int? CategoryId { get; set; }
         public GetCategoryNestedDto? Category { get; set; }
-        //public ICollection<BookFormat> BookFormats { get; set; }
+        public ICollection<GetBookFormatNestedDto> BookFormats { get; set; }
         public ICollection<GetBookImageNestedDto> BookImages { get; set; }
-        //public ICollection<BookLanguage> BookLanguages { get; set; }
+        public ICollection<GetBookLanguageNestedDto> BookLanguages { get; set; }
         //public ICollection<Comment> Comments { get; set; }
 
     }

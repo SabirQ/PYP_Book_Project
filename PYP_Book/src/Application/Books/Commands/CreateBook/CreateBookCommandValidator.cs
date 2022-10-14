@@ -14,7 +14,7 @@ namespace PYP_Book.Application.Books.Commands.CreateBook
     {
         private const int ACCEPTABLE_FILE_SIZE = 2;
         private const int MINIMAL_PRICE = 1;
-        private const int MAX_PRICE = 1;
+        private const int MAX_PRICE = 1000;
         private readonly IUnitOfWork _unit;
 
         public CreateBookCommandValidator(IUnitOfWork unit)
@@ -28,10 +28,14 @@ namespace PYP_Book.Application.Books.Commands.CreateBook
                 .NotEmpty().WithMessage("You must choose at least one image for primary")
                 .Must(CheckFileSizeAndType).WithMessage($"Primary image was not choosen or file size(must be less or equal to {ACCEPTABLE_FILE_SIZE}) and file type is not supported");
             RuleFor(x => x.Price)
-                .LessThanOrEqualTo(MINIMAL_PRICE)
+                .GreaterThanOrEqualTo(MINIMAL_PRICE)
                 .WithMessage($"Book price must be more than or equal to {MINIMAL_PRICE}")
-                .GreaterThanOrEqualTo(MAX_PRICE)
+                .LessThanOrEqualTo(MAX_PRICE)
                 .WithMessage($"Book price must be less than or equal to {MAX_PRICE}");
+            RuleFor(x => x.AuthorId)
+                .NotEmpty().WithMessage("AuthorId required");
+            RuleFor(x => x.CategoryId)
+              .NotEmpty().WithMessage("CategoryId required");
         }
 
         public async Task<bool> IsUniqueName(string bookName, CancellationToken cancellationToken)

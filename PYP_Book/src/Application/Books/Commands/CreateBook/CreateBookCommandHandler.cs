@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using PYP_Book.Application.Common.Exceptions;
 using PYP_Book.Application.Common.Interfaces;
 using PYP_Book.Domain.Entities;
 
@@ -22,17 +23,14 @@ namespace PYP_Book.Application.Books.Commands.CreateBook
         {
             if (request.DiscountId!=null)
             {
-                Discount discount = await _unit.DiscountRepository.GetByIdAsync(request.DiscountId.Value);
+                Discount discount = await _unit.DiscountRepository.GetByIdAsync(request.DiscountId.GetValueOrDefault(0));
                 if (discount==null)
-                {
-                    //Throw
-                    throw new Exception();
-                }
+                    throw new NotFoundException("Discount was not found");
             }
-            Author author = await _unit.AuthorRepository.GetByIdAsync(request.AuthorId.Value);
-            if (author == null) throw new Exception();
-            Category category = await _unit.CategoryRepository.GetByIdAsync(request.CategoryId.Value);
-            if (category==null) throw new Exception();
+            Author author = await _unit.AuthorRepository.GetByIdAsync(request.AuthorId.GetValueOrDefault(0));
+            if (author == null) throw new NotFoundException("Author was not found");
+            Category category = await _unit.CategoryRepository.GetByIdAsync(request.CategoryId.GetValueOrDefault(0));
+            if (category==null) throw new NotFoundException("Category was not found");
             var entity = _mapper.Map<Book>(request);
             if (request.Images!=null)
             {

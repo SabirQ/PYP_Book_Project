@@ -18,7 +18,7 @@ namespace PYP_Book.Application.Authors.Queries.GetAuthor
 
         public async Task<GetAuthorDto> Handle(GetAuthorQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _unit.AuthorRepository.GetByIdWithIncludesAsync(request.Id,nameof(Author.Books),nameof(Book.Discount));
+            var entity = await _unit.AuthorRepository.GetByIdWithIncludesAsync(request.Id,nameof(Author.Books),"Books.Discount");
             var authorDto = _mapper.Map<GetAuthorDto>(entity);
             return authorDto;
         }

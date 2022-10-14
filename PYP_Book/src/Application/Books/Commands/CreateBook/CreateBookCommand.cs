@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using PYP_Book.Application.Formats.Queries.GetFormat;
+using PYP_Book.Application.Languages.Queries.GetLanguage;
 using PYP_Book.Application.Mappings;
 using PYP_Book.Domain.Entities;
 using System;
@@ -15,12 +17,12 @@ namespace PYP_Book.Application.Books.Commands.CreateBook
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }=0;
-        public int? AuthorId { get; set; }
-        public int? DiscountId { get; set; }
-        public int? CategoryId { get; set; }
-        //public ICollection<BookFormat> BookFormats { get; set; }
+        public int? AuthorId { get; set; } = null;
+        public int? DiscountId { get; set; } = null;
+        public int? CategoryId { get; set; } = null;
+        public ICollection<GetBookFormatNestedDto>? BookFormats { get; set; }
         public ICollection<IFormFile> Images { get; set; }
-        //public ICollection<BookLanguage> BookLanguages { get; set; }
+        public ICollection<GetBookLanguageNestedDto> BookLanguages { get; set; }
         //public ICollection<Comment> Comments { get; set; }
     }
 }

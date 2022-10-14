@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using PYP_Book.Application.Common.Exceptions;
 using PYP_Book.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace PYP_Book.Application.Categories.Commands.UpdateCategory
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
     }
 
     public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand>
@@ -30,11 +31,8 @@ namespace PYP_Book.Application.Categories.Commands.UpdateCategory
             var entity = await _unit.CategoryRepository.GetByIdAsync(request.Id);
 
             if (entity == null)
-            {
-                throw new ArgumentException();
-                //throw new NotFoundException("UpdateCategoryCommand");
-                //throw new NotFoundException(nameof(DeleteCategoryCommand), request.Id);
-            }
+                throw new NotFoundException(nameof(UpdateCategoryCommand), request.Id);
+           
 
             entity.Name = request.Name;
             if (request.Image!=null)

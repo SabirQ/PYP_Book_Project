@@ -13,7 +13,5 @@ namespace PYP_Book.Domain.Entities
         public string UserId { get; set; }
         public AppUser AppUser { get; set; }
         public ICollection<BasketItem> BasketItems { get; set; }
-        public DateTime SaleDate { get; set; }
-        public bool? Status { get; set; }
     }
 }

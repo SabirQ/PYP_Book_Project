@@ -10,6 +10,7 @@ namespace PYP_Book.Domain.Entities
 {
     public class AppUser: IdentityUser
     {
-
+        public string Name { get; set; }
+        public string Surname { get; set; }
     }
 }

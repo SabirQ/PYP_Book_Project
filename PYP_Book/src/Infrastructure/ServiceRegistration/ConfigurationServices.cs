@@ -18,33 +18,23 @@ namespace PYP_Book.Infrastructure.ServiceRegistration
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection service, IConfiguration configuration)
         {
-
             //serviceCollection.AddScoped<AuditableEntitySaveChangesInterceptor>();
-
             service.AddDbContext<AppDbContext>(options =>
                    options.UseSqlServer(configuration.GetConnectionString("Default"),
                        builder => builder.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
-
-            //serviceCollection.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-            //serviceCollection.AddScoped<ApplicationDbContextInitialiser>();
-
-            //serviceCollection
-            //     .AddDefaultIdentity<ApplicationUser>()
-            //     .AddRoles<IdentityRole>()
-            //     .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            //serviceCollection.AddIdentityServer()
-            //    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             service.AddTransient<ICategoryRepository, CategoryRepository>();
             service.AddTransient<IBookRepository, BookRepository>();
             service.AddTransient<IDiscountRepository, DiscountRepository>();
             service.AddTransient<IAuthorRepository, AuthorRepository>();
-            service.AddTransient<IUnitOfWork, UnitOFWork>();
-            service.AddTransient<IFileUploadService, FileUploadService>();
+            service.AddTransient < ILanguageRepository,LanguageRepository>();
+            service.AddTransient < IFormatRepository ,FormatRepository>();
+            service.AddTransient < ICommentRepository ,CommentRepository>();
+            service.AddTransient<ISettingRepository, SettingRepository>();
 
-            //service.AddAuthentication()
-            //    .AddIdentityServerJwt();
+            service.AddTransient<IFileUploadService, FileUploadService>();
+            service.AddTransient<IIdentityService, IdentityService>();
+            service.AddTransient<IUnitOfWork, UnitOFWork>();
 
             return service;
         }

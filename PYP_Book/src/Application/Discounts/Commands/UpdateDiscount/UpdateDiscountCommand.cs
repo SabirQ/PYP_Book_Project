@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using PYP_Book.Application.Common.Exceptions;
 using PYP_Book.Application.Common.Interfaces;
 
 namespace PYP_Book.Application.Discounts.Commands.UpdateDiscount
@@ -8,9 +9,9 @@ namespace PYP_Book.Application.Discounts.Commands.UpdateDiscount
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
+        public byte Percentage { get; set; }
     }
-
+   
     public class UpdateDiscountCommandHandler : IRequestHandler<UpdateDiscountCommand>
     {
         private readonly IUnitOfWork _unit;
@@ -22,16 +23,12 @@ namespace PYP_Book.Application.Discounts.Commands.UpdateDiscount
         public async Task<Unit> Handle(UpdateDiscountCommand request, CancellationToken cancellationToken)
         {
             var entity = await _unit.DiscountRepository.GetByIdAsync(request.Id);
-
             if (entity == null)
             {
-                throw new ArgumentException();
-                //throw new NotFoundException("UpdateDiscountCommand");
-                //throw new NotFoundException(nameof(DeleteDiscountCommand), request.Id);
+                throw new NotFoundException(nameof(UpdateDiscountCommand), request.Id);
             }
-
             entity.Name = request.Name;
-            entity.Surname = request.Surname;
+            entity.Percentage = request.Percentage;
             _unit.DiscountRepository.Update(entity);
             await _unit.SaveChangesAsync(cancellationToken);
             return Unit.Value;

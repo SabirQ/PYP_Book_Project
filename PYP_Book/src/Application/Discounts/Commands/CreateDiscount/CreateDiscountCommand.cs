@@ -8,6 +8,6 @@ namespace PYP_Book.Application.Discounts.Commands.CreateDiscount
     public class CreateDiscountCommand : IRequest<int>, IMapFrom<Discount>
     {
         public string Name { get; set; }
-        public string Surname { get; set; }
+        public byte Percentage { get; set; }
     }
 }

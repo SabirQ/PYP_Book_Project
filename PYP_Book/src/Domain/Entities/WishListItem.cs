@@ -14,6 +14,5 @@ namespace PYP_Book.Domain.Entities
         public WishList WishList { get; set; }
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
-        public DateTime SaleDate { get; set; }
     }
 }

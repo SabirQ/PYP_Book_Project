@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace PYP_Book.Application.Authors.Queries.GetAuthor
+namespace PYP_Book.Application.Discounts.Queries.GetDiscount
 {
-    public record GetAuthorQuery : IRequest<GetAuthorDto>
+    public record GetDiscountQuery : IRequest<GetDiscountDto>
     {
         public int Id { get; set; }
     };

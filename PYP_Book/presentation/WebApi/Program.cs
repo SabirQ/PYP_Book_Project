@@ -6,6 +6,7 @@ using PYP_Book.Domain.Entities;
 using PYP_Book.Infrastructure.Data;
 using PYP_Book.Infrastructure.ServiceRegistration;
 using System.Text;
+using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,7 +57,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCustomMiddlewares();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

@@ -14,7 +14,7 @@ namespace PYP_Book.Application.Books.Commands.UpdateBook
     {
         private readonly IUnitOfWork _unit;
         private const int MINIMAL_PRICE = 1;
-        private const int MAX_PRICE = 1;
+        private const int MAX_PRICE = 1000;
 
         public UpdateBookCommandValidator( IUnitOfWork unit)
         {
@@ -30,9 +30,9 @@ namespace PYP_Book.Application.Books.Commands.UpdateBook
             RuleFor(x => x.CategoryId)
                .MustAsync(IsCategoryExist).WithMessage($"Category was not found");
             RuleFor(x => x.Price)
-                .LessThanOrEqualTo(MINIMAL_PRICE)
+                .GreaterThanOrEqualTo(MINIMAL_PRICE)
                 .WithMessage($"Book price must be more than or equal to {MINIMAL_PRICE}")
-                .GreaterThanOrEqualTo(MAX_PRICE)
+                .LessThanOrEqualTo(MAX_PRICE)
                 .WithMessage($"Book price must be less than or equal to {MAX_PRICE}");
 
         }
@@ -41,21 +41,21 @@ namespace PYP_Book.Application.Books.Commands.UpdateBook
             if (id == null) return true;
             var author = await _unit.AuthorRepository.GetByIdAsync(id.Value);
             if (author == null) return false;
-            else return true;
+            return true;
         }
         public async Task<bool> IsCategoryExist(int? id, CancellationToken cancellationToken)
         {
             if (id == null) return true;
             var category = await _unit.CategoryRepository.GetByIdAsync(id.Value);
             if (category == null) return false;
-            else return true;
+            return true;
         }
         public async Task<bool> IsDiscountExist(int? id, CancellationToken cancellationToken)
         {
             if (id == null) return true;
             var discount = await _unit.DiscountRepository.GetByIdAsync(id.Value);
             if (discount == null) return false;
-            else return true;
+            return true;
         }
         public async Task<bool> IsUniqueName(string bookName,CancellationToken cancellationToken)
         {
