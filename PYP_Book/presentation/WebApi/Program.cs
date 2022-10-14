@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using PYP_Book.Application.ServiceRegistration;
 using PYP_Book.Domain.Entities;
 using PYP_Book.Infrastructure.Data;
+using PYP_Book.Infrastructure.ServiceRegistration;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
+//builder.Services.AddFluentValidationAutoValidation(configuration => configuration.DisableDataAnnotationsValidation = false)
+//    .AddFluentValidationClientsideAdapters();
 builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 {
     opt.SignIn.RequireConfirmedEmail = false;
@@ -26,14 +32,14 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
     opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
 
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
-builder.Services.AddAuthentication(opt =>
+builder.Services.AddAuthentication((opt) =>
 {
     opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(cfg =>
+}).AddJwtBearer((configuration) =>
 {
-    cfg.TokenValidationParameters = new TokenValidationParameters
+    configuration.TokenValidationParameters = new TokenValidationParameters
     {
         ValidAudience = builder.Configuration["Jwt:Audience"],
         ValidIssuer = builder.Configuration["Jwt:Issue"],

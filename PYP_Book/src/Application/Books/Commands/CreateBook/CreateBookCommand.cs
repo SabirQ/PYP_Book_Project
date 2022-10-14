@@ -19,7 +19,7 @@ namespace PYP_Book.Application.Books.Commands.CreateBook
         public int? DiscountId { get; set; }
         public int? CategoryId { get; set; }
         //public ICollection<BookFormat> BookFormats { get; set; }
-        public ICollection<CreateBookImageNestedCommand> Images { get; set; }
+        public ICollection<IFormFile> Images { get; set; }
         //public ICollection<BookLanguage> BookLanguages { get; set; }
         //public ICollection<Comment> Comments { get; set; }
     }

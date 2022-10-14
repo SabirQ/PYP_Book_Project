@@ -16,7 +16,7 @@ namespace PYP_Book.Application.Authors.Commands.DeleteAuthor
 
         public async Task<Unit> Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
         {
-            Author entity = await _unit.AuthorRepository.GetByIdWithIncludesAsync(request.Id,nameof(Author.Books),nameof(Book.Author));
+            Author entity = await _unit.AuthorRepository.GetByIdWithIncludesAsync(request.Id,nameof(Author.Books));
             if (entity == null)
             {
                 //throw new NotFoundException(nameof(DeleteAuthorCommand), request.Id);

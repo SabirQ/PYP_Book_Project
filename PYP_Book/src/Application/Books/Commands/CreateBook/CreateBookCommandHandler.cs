@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using PYP_Book.Application.Common.Interfaces;
 using PYP_Book.Domain.Entities;
 
@@ -41,19 +42,22 @@ namespace PYP_Book.Application.Books.Commands.CreateBook
             await _unit.SaveChangesAsync(cancellationToken);
             return entity.Id;
         }
-        public async Task<ICollection<BookImage>> MapImagesAsync(Book book, ICollection<CreateBookImageNestedCommand> images)
+        public async Task<ICollection<BookImage>> MapImagesAsync(Book book, ICollection<IFormFile> images)
         {
             ICollection<BookImage> bookImages = new List<BookImage>();
             for (int i = 0; i < images.Count; i++)
             {
-                if (!_unit.FileUpload.CheckImage(images.ElementAt(i).Image, ACCEPTABLE_FILE_SIZE))
+                if (!_unit.FileUpload.CheckImage(images.ElementAt(i), ACCEPTABLE_FILE_SIZE))
                 {
                     images.Remove(images.ElementAt(i));
                 }
-                BookImage image = _mapper.Map<BookImage>(images.ElementAt(i));
-                image.Alternative = images.ElementAt(i).Image.FileName;
-                image.ImageUrl = await _unit.FileUpload.FileCreateAsync(images.ElementAt(i).Image);
-                image.Book = book;
+                BookImage image = new BookImage
+                {
+                    Alternative = images.ElementAt(i).FileName,
+                    ImageUrl = await _unit.FileUpload.FileCreateAsync(images.ElementAt(i)),
+                    Book = book,
+                    Primary=(i==0?true:false)
+                };
                 bookImages.Add(image);
             }
             return bookImages;

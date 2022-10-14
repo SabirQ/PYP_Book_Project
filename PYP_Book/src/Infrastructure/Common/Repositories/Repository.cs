@@ -35,10 +35,7 @@ namespace PYP_Book.Infrastructure.Common.Repositories
         public async Task<ICollection<T>> GetAllAsync(Expression<Func<T, bool>> expression=null,bool getDeleted=false,  params string[] includes)
         {
             IQueryable<T> query = expression is null ? _dbSet.AsQueryable() : _dbSet.Where(expression);
-            if (getDeleted==false)
-            {
-                query = query.Where(x => x.Deleted == false);
-            }
+            query = query.Where(x => x.Deleted == getDeleted);
             if (includes.Length != 0)
             {
                 for (int i = 0; i < includes.Length; i++)

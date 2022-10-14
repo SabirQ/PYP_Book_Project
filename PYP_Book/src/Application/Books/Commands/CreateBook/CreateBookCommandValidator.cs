@@ -39,19 +39,15 @@ namespace PYP_Book.Application.Books.Commands.CreateBook
             var book=await _unit.BookRepository.GetAllAsync(x=>x.Name==bookName,true);
             return book.Count==0;
         }
-        
-        public bool CheckFileSizeAndType(ICollection<CreateBookImageNestedCommand> files)
-        {   bool isPrimaryValid=false;
-            int PrimaryCount=0;
-            for (int i = 0; i < files.Count; i++)
+        public bool CheckFileSizeAndType(ICollection<IFormFile> files)
+        {
+            if (files == null) return false;
+            if (files.Count==0) return false;
+            if (!_unit.FileUpload.CheckImage(files.ElementAt(0), ACCEPTABLE_FILE_SIZE))
             {
-                if (files.ElementAt(i).Primary==true)
-                {
-                    PrimaryCount++;
-                    isPrimaryValid = _unit.FileUpload.CheckImage(files.ElementAt(i).Image, ACCEPTABLE_FILE_SIZE);
-                }
+                return false;
             }
-            return isPrimaryValid && PrimaryCount==1;
+            return true;
         }
     }
 }

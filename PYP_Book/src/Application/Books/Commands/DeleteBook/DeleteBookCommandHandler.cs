@@ -21,6 +21,9 @@ namespace PYP_Book.Application.Books.Commands.DeleteBook
                 //throw new NotFoundException(nameof(DeleteBookCommand), request.Id);
                 throw new ArgumentException();
             }
+            entity.AuthorId = null;
+            entity.CategoryId=null;
+            entity.DiscountId = null;
             if (entity.BookImages !=null)
             {
                 for (int i = 0; i < entity.BookImages.Count; i++)

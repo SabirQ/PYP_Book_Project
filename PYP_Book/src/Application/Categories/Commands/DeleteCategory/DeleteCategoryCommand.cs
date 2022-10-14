@@ -21,7 +21,7 @@ namespace PYP_Book.Application.Categories.Commands.DeleteCategory
 
         public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            Category entity = await _unit.CategoryRepository.GetByIdWithIncludesAsync(request.Id,nameof(Category.Books),nameof(Book.Category));
+            Category entity = await _unit.CategoryRepository.GetByIdWithIncludesAsync(request.Id,nameof(Category.Books));
             if (entity == null)
             {
                 //throw new NotFoundException(nameof(DeleteCategoryCommand), request.Id);

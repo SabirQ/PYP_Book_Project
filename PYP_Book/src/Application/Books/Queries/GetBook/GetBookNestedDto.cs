@@ -21,10 +21,4 @@ namespace PYP_Book.Application.Books.Queries.GetBook
         public string Name { get; set; }
         public byte Percentage { get; set; }
     }
-    public class GetBookImageNestedDto : IMapFrom<BookImage>
-    {
-        public int Id { get; set; }
-        public string ImageUrl { get; set; }
-        public bool Primary { get; set; }
-    }
 }
