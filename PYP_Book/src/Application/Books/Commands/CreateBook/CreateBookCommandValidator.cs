@@ -1,0 +1,55 @@
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
+using PYP_Book.Application.Common.Interfaces;
+using PYP_Book.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PYP_Book.Application.Books.Commands.CreateBook
+{
+    public class CreateBookCommandValidator : AbstractValidator<CreateBookCommand>
+    {
+        private const int ACCEPTABLE_FILE_SIZE = 2;
+        private const int MINIMAL_PRICE = 1;
+        private const int MAX_PRICE = 1;
+        private readonly IUnitOfWork _unit;
+
+        public CreateBookCommandValidator(IUnitOfWork unit)
+        {
+            _unit = unit;
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("Name is required")
+                .MaximumLength(100).WithMessage("Name must not exceed 100 characters")
+                .MustAsync(IsUniqueName).WithMessage("The specified name already exists");
+            RuleFor(x => x.Images)
+                .NotEmpty().WithMessage("You must choose at least one image for primary")
+                .Must(CheckFileSizeAndType).WithMessage($"Primary image was not choosen or file size(must be less or equal to {ACCEPTABLE_FILE_SIZE}) and file type is not supported");
+            RuleFor(x => x.Price)
+                .LessThanOrEqualTo(MINIMAL_PRICE)
+                .WithMessage($"Book price must be more than or equal to {MINIMAL_PRICE}")
+                .GreaterThanOrEqualTo(MAX_PRICE)
+                .WithMessage($"Book price must be less than or equal to {MAX_PRICE}");
+        }
+
+        public async Task<bool> IsUniqueName(string bookName, CancellationToken cancellationToken)
+        {
+            var book=await _unit.BookRepository.GetAllAsync(x=>x.Name==bookName,true);
+            return book.Count==0;
+        }
+        
+        public bool CheckFileSizeAndType(ICollection<CreateBookImageNestedCommand> files)
+        {
+            for (int i = 0; i < files.Count; i++)
+            {
+                if (files.ElementAt(i).Primary==true)
+                {
+                    return _unit.FileUpload.CheckImage(files.ElementAt(i).Image, ACCEPTABLE_FILE_SIZE);
+                }
+            }
+            return false;
+        }
+    }
+}

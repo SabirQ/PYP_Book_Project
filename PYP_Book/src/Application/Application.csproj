@@ -9,16 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Authors\Commands\Create\" />
-    <Folder Include="Authors\Commands\Delete\" />
-    <Folder Include="Authors\Commands\Update\" />
-    <Folder Include="Authors\Queries\Gets\" />
-    <Folder Include="Authors\Queries\Get\" />
-    <Folder Include="Books\Commands\Create\" />
-    <Folder Include="Books\Commands\Delete\" />
-    <Folder Include="Books\Commands\Update\" />
-    <Folder Include="Books\Queries\Gets\" />
-    <Folder Include="Books\Queries\Get\" />
     <Folder Include="Discounts\Commands\Create\" />
     <Folder Include="Discounts\Commands\Delete\" />
     <Folder Include="Discounts\Commands\Update\" />

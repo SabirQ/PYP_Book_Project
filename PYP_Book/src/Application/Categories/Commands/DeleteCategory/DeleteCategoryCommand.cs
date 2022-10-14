@@ -12,16 +12,16 @@ namespace PYP_Book.Application.Categories.Commands.DeleteCategory
     public record DeleteCategoryCommand(int Id) : IRequest;
     public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand>
     {
-        private readonly ICategoryRepository _repository;
+        private readonly IUnitOfWork _unit;
 
-        public DeleteCategoryCommandHandler(ICategoryRepository repository)
+        public DeleteCategoryCommandHandler(IUnitOfWork unit)
         {
-            _repository = repository;
+            _unit = unit;
         }
 
         public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            Category entity = await _repository.GetByIdWithIncludesAsync(request.Id,nameof(Category.Books),nameof(Book.Category));
+            Category entity = await _unit.CategoryRepository.GetByIdWithIncludesAsync(request.Id,nameof(Category.Books),nameof(Book.Category));
             if (entity == null)
             {
                 //throw new NotFoundException(nameof(DeleteCategoryCommand), request.Id);
@@ -34,7 +34,8 @@ namespace PYP_Book.Application.Categories.Commands.DeleteCategory
                     entity.Books.ElementAt(i).CategoryId = null;
                 }
             }
-            await _repository.SoftDeleteAsync(entity, cancellationToken);
+            _unit.CategoryRepository.SoftDelete(entity);
+            await _unit.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
 

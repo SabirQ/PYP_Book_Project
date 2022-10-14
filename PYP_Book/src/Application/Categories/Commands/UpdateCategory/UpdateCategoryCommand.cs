@@ -18,18 +18,16 @@ namespace PYP_Book.Application.Categories.Commands.UpdateCategory
 
     public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand>
     {
-        private readonly ICategoryRepository _repository;
-        private readonly IFileUploadService _fileUpload;
+        private readonly IUnitOfWork _unit;
 
-        public UpdateCategoryCommandHandler(ICategoryRepository repository,IFileUploadService fileUpload)
+        public UpdateCategoryCommandHandler(IUnitOfWork unit)
         {
-            _repository = repository;
-            _fileUpload = fileUpload;
+            _unit = unit;
         }
 
         public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.GetByIdAsync(request.Id);
+            var entity = await _unit.CategoryRepository.GetByIdAsync(request.Id);
 
             if (entity == null)
             {
@@ -41,9 +39,10 @@ namespace PYP_Book.Application.Categories.Commands.UpdateCategory
             entity.Name = request.Name;
             if (request.Image!=null)
             {
-               entity.ImageUrl=await _fileUpload.FileCreateAsync(request.Image);
+               entity.ImageUrl=await _unit.FileUpload.FileCreateAsync(request.Image);
             }
-            await _repository.UpdateAsync(entity, cancellationToken);
+            _unit.CategoryRepository.Update(entity);
+            await _unit.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
     }

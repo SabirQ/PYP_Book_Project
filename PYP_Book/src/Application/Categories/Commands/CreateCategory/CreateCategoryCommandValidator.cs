@@ -12,14 +12,12 @@ namespace PYP_Book.Application.Categories.Commands.CreateCategory
 {
     public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
     {
-        private readonly ICategoryRepository _repository;
-        private readonly IFileUploadService _fileUpload;
         private const int ACCEPTABLE_FILE_SIZE = 2;
+        private readonly IUnitOfWork _unit;
 
-        public CreateCategoryCommandValidator(ICategoryRepository repository,IFileUploadService fileUpload)
+        public CreateCategoryCommandValidator(IUnitOfWork unit)
         {
-            _repository = repository;
-            _fileUpload = fileUpload;
+            _unit = unit;
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Name is requried")
                 .MaximumLength(100).WithMessage("Name must not exceed 100 characters")
@@ -31,12 +29,12 @@ namespace PYP_Book.Application.Categories.Commands.CreateCategory
 
         public async Task<bool> IsUniqueName(string categoryName, CancellationToken cancellationToken)
         {
-            var category=await _repository.GetAllAsync(x=>x.Name==categoryName,true);
-            return category==null;
+            var category=await _unit.CategoryRepository.GetAllAsync(x=>x.Name==categoryName,true);
+            return category.Count==0;
         }
         public bool CheckFileSizeAndType(IFormFile file)
         {
-            return _fileUpload.CheckImage(file, ACCEPTABLE_FILE_SIZE);
+            return _unit.FileUpload.CheckImage(file, ACCEPTABLE_FILE_SIZE);
         }
     }
 }

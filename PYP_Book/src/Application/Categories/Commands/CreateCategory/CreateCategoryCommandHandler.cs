@@ -7,22 +7,20 @@ namespace PYP_Book.Application.Categories.Commands.CreateCategory
 {
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, int>
     {
-        private readonly ICategoryRepository _repository;
+        private readonly IUnitOfWork _unit;
         private readonly IMapper _mapper;
-        private readonly IFileUploadService _fileUpload;
-
-        public CreateCategoryCommandHandler(ICategoryRepository repository, IMapper mapper,IFileUploadService fileUpload)
+        public CreateCategoryCommandHandler(IUnitOfWork unit,IMapper mapper)
         {
-            _repository = repository;
+            _unit = unit;
             _mapper = mapper;
-            _fileUpload = fileUpload;
         }
 
         public async Task<int> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<Category>(request);
-            entity.ImageUrl=await _fileUpload.FileCreateAsync(request.Image);
-            await _repository.AddAsync(entity,cancellationToken);
+            entity.ImageUrl=await _unit.FileUpload.FileCreateAsync(request.Image);
+            await _unit.CategoryRepository.AddAsync(entity);
+            await _unit.SaveChangesAsync(cancellationToken);
             return entity.Id;
         }
     }

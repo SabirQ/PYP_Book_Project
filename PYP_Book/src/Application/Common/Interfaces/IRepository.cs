@@ -13,9 +13,9 @@ namespace PYP_Book.Application.Common.Interfaces
         Task<ICollection<T>> GetAllAsync(Expression<Func<T, bool>> expression=null,bool getDeleted=false, params string[] includes);
         Task<T> GetByIdAsync(int id);
         Task<T> GetByIdWithIncludesAsync(int id, params string[] includes);
-        Task<T> AddAsync(T entity, CancellationToken cancellationToken);
-        Task DeleteAsync(T entity, CancellationToken cancellationToken);
-        Task SoftDeleteAsync(T entity, CancellationToken cancellationToken);
-        Task UpdateAsync(T entity, CancellationToken cancellationToken);
+        Task<T> AddAsync(T entity);
+        void Delete(T entity);
+        void SoftDelete(T entity);
+        void Update(T entity);
     }
 }

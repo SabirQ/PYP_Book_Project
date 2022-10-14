@@ -9,7 +9,7 @@ namespace PYP_Book.Domain.Entities
 {
     public class BookImage: BaseAuditableEntity
     {
-        public string Name { get; set; }
+        public string ImageUrl { get; set; }
         public string Alternative { get; set; }
         public int? BookId { get; set; }
         public Book? Book { get; set; }

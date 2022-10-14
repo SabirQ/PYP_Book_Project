@@ -1,4 +1,4 @@
-﻿using Domain.Commons;
+﻿ using Domain.Commons;
 using Microsoft.EntityFrameworkCore;
 using PYP_Book.Application.Common.Interfaces;
 using PYP_Book.Infrastructure.Data;
@@ -21,20 +21,17 @@ namespace PYP_Book.Infrastructure.Common.Repositories
             _context = context;
             _dbSet = _context.Set<T>();
         }
-        public async Task<T> AddAsync(T entity,CancellationToken cancellationToken)
+        public async Task<T> AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync(cancellationToken);
             return entity;
         }
 
 
-        public async Task DeleteAsync(T entity, CancellationToken cancellationToken)
+        public void Delete(T entity)
         {
            _dbSet.Remove(entity);
-           await _context.SaveChangesAsync(cancellationToken);
         }
-
         public async Task<ICollection<T>> GetAllAsync(Expression<Func<T, bool>> expression=null,bool getDeleted=false,  params string[] includes)
         {
             IQueryable<T> query = expression is null ? _dbSet.AsQueryable() : _dbSet.Where(expression);
@@ -70,16 +67,15 @@ namespace PYP_Book.Infrastructure.Common.Repositories
             return await query.SingleOrDefaultAsync();
         }
 
-        public async Task SoftDeleteAsync(T entity, CancellationToken cancellationToken)
+        public void SoftDelete(T entity)
         {
            entity.Deleted = true;
-           await UpdateAsync(entity, cancellationToken);
+           Update(entity);
         }
 
-        public async Task UpdateAsync(T entity, CancellationToken cancellationToken)
+        public void Update(T entity)
         {
             _dbSet.Update(entity);
-            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }
